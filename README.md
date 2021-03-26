@@ -1,7 +1,24 @@
 # reduced_two_step_task
 
 data_extraction script loads the raw data from pycontrol log files and saves as pickle files.
-data_loading script loads pickle files save by data_extraction.
+data_loading script loads pickle files saved by data_extraction.
+data folder should be placed at the root directory and organized as the following:
+- ROOT/data/BATCH#/SUBJECT#/Training
+- ROOT/data/BATCH#/SUBJECT#/Experiment
+
+BATCH# is the batch number, for example "2019.12-2020.01", SUBJECT# is the subject number of the mice, for example "Two_step_WT1". It will save pickle files into:
+- ROOT/pickle/BATCH#/Training/file.pickle
+- ROOT/pickle/BATCH#/Experiment/file.pickle
+
+All sucjects in the same batch will be saved into the same file.pickle. This file.pickle when loaded is a python dictionary as:
+```json
+{SUBJECT_NAME:{'training_stage':STAGE,
+               ...
+               'state_transition':[{0:(state, action, reward, new_state), 1:()}, ...],
+               'choice_type':['UA', ...],
+               'block_type':[]
+               }
+```
 
 enviroment, agent, defines reinforcement learning framwork and the agents that interacts with.
 two agent has been defined:
